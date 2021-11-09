@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<beans xmlns = "http://www.springframework.org/schema/beans"
+   xmlns:xsi = "http://www.w3.org/2001/XMLSchema-instance"
+   xmlns:context = "http://www.springframework.org/schema/context"
+   xsi:schemaLocation = "http://www.springframework.org/schema/beans
+   http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+   http://www.springframework.org/schema/context
+   http://www.springframework.org/schema/context/spring-context-3.0.xsd">
+   
+   
+  <context:annotation-config></context:annotation-config>
+   
+   <bean id="emp" class="com.global.Employee" scope = "singleton" init-method="init" destroy-method="cleanup">   
+     <property name="id" value="20"></property>
+     <!-- <property name="name" value="Ali"></property>
+     <property name="salary" value="20200"></property> -->
+     <!-- <property name="department" ref="dept"></property> -->
+     
+     <property name="address">
+	     <list>
+		       <ref bean="address1"/>
+		       <ref bean="address2"/>
+	     </list>
+     </property>
+     
+   </bean>
+   
+   <bean id="showBeanLifCycle" class="com.global.ShowBeanLifCycle"></bean>
+   
+   
+    <!-- <bean id="emp" class="com.global.Employee" scope = "prototype">
+    
+        <property name="name" value="mohamed"></property>
+		<constructor-arg value="20" type="Long"></constructor-arg>
+		<constructor-arg value="Ali" type="String"></constructor-arg>
+		<constructor-arg value="2000" type="Double"></constructor-arg>
+		
+		<constructor-arg ref="dept" type="Department"></constructor-arg>
+		
+		<constructor-arg >
+			<list>
+				<ref bean="address1"/>
+				<ref bean="address2"/>
+			</list>
+		</constructor-arg>
+   </bean> -->
+   
+   
+   
+  <!--  <bean id="dept" class="com.global.Department" >   
+     <property name="id" value="1"></property>
+     <property name="name" value="IT"></property>
+   </bean> 
+   
+   <bean id="dept2" class="com.global.Department" >   
+     <property name="id" value="1"></property>
+     <property name="name" value="IT"></property>
+   </bean>  -->
+   
+   <bean id="address1" class="com.global.Address" >   
+     <property name="id" value="1"></property>
+     <property name="city" value="Cairo"></property>
+   </bean>
+   
+   <bean id="address2" class="com.global.Address" >   
+     <property name="id" value="2"></property>
+     <property name="city" value="Maadi"></property>
+   </bean>
+   
+   
+   
+</beans>   
+
