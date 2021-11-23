@@ -8,12 +8,13 @@ import org.springframework.jdbc.core.namedparam.BeanPropertySqlParameterSource;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Repository;
 
 import com.global.hr.entity.Employee;
 import com.global.hr.mapper.EmployeeMapper;
 import com.global.hr.repository.EmployeeReps;
 
-@Component
+@Repository
 @Qualifier("employeeNamedParameterJDBCRepo")
 public class EmployeeNamedParameterJDBCRepo implements EmployeeReps {
 	

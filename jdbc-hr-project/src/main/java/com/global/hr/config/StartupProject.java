@@ -1,6 +1,7 @@
 package com.global.hr.config;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Component;
@@ -15,6 +16,7 @@ public class StartupProject implements CommandLineRunner {
 	private JdbcTemplate jdbcTemplate;
 
 	@Autowired
+	@Qualifier("employeeJDBCRepo")
 	private EmployeeReps employeeReps;
 
 	@Override

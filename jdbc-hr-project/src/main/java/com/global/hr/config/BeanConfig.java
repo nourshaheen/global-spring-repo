@@ -1,5 +1,6 @@
 package com.global.hr.config;
 
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Scope;
@@ -11,6 +12,7 @@ public class BeanConfig {
 	
 	@Bean()
 	@Scope("singleton")
+	@Qualifier("getEmployeeJDBCRepo")
 	public EmployeeJDBCRepo getEmployeeJDBCRepo() {
 		
 		return new EmployeeJDBCRepo();

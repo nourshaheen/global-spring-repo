@@ -1,26 +1,24 @@
 package com.global.hr.repository.impl;
 
 import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Primary;
 import org.springframework.jdbc.core.JdbcTemplate;
-import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
-import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Repository;
 
 import com.global.hr.entity.Employee;
 import com.global.hr.mapper.EmployeeMapper;
 import com.global.hr.repository.EmployeeReps;
 
-@Component
-//@Repository
-@Primary
-//@Qualifier("employeeJDBCRepo")
+@Repository
+//@Primary
+@Qualifier("employeeJDBCRepo")
 public class EmployeeJDBCRepo implements EmployeeReps {
 	
 	
-	@Autowired
+	
 	private JdbcTemplate jdbcTemplate ;
 
 	@Override
@@ -64,6 +62,11 @@ public class EmployeeJDBCRepo implements EmployeeReps {
 	public List<Employee> findByNameAndSalary(String name, Double salary) {
 		// TODO Auto-generated method stub
 		return null;
+	}
+
+	@Autowired
+	public void setJdbcTemplate(JdbcTemplate jdbcTemplate) {
+		this.jdbcTemplate = jdbcTemplate;
 	}
 
 }
