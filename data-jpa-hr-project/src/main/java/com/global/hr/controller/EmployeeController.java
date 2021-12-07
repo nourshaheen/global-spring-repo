@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.global.hr.entity.Employee;
+import com.global.hr.entity.EmployeeReponse;
 import com.global.hr.service.EmployeeService;
 
 @RestController
@@ -23,9 +24,18 @@ public class EmployeeController {
 	private EmployeeService employeeService;
 
 	@GetMapping("/{id}")
-	public Employee findById(@PathVariable Long id) {
+	public EmployeeReponse findById(@PathVariable Long id) {
+		
+		Employee emp = employeeService.findById(id);
+		
+		EmployeeReponse res= new EmployeeReponse ();
+		res.setId(emp.getId());
+		res.setName(emp.getName());
+		res.setDepartment(emp.getDepartment());
+		res.setUser(emp.getUser());
+		
 
-		return employeeService.findById(id);
+		return res;
 	}
 
 	@GetMapping("/filter")

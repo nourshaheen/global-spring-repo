@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.global.hr.entity.Department;
 import com.global.hr.entity.Employee;
 import com.global.hr.repository.EmployeeRepo;
 
@@ -13,6 +14,9 @@ public class EmployeeService {
 
 	@Autowired
 	private EmployeeRepo employeeRepo;
+	
+	@Autowired
+	private DepartmentService departmentService;
 
 	public Employee findById(Long id) {
 
@@ -25,6 +29,14 @@ public class EmployeeService {
 	}
 
 	public Employee insert(Employee emp) {
+		
+		if (emp.getDepartment() != null && emp.getDepartment().getId() != null) {
+			
+			Department dept = departmentService.findById(emp.getDepartment().getId());
+			dept.setName(emp.getDepartment().getName());
+			
+			emp.setDepartment(dept);
+		}
 
 		return employeeRepo.save(emp);
 	}
