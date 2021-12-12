@@ -1,10 +1,18 @@
 package com.global.hr.service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.domain.Sort.Direction;
+import org.springframework.data.domain.Sort.Order;
 import org.springframework.stereotype.Service;
 
+import com.global.hr.HRStatisticProjection;
 import com.global.hr.entity.Department;
 import com.global.hr.entity.Employee;
 import com.global.hr.repository.EmployeeRepo;
@@ -22,10 +30,42 @@ public class EmployeeService {
 
 		return employeeRepo.findById(id).orElseThrow();
 	}
+	
+	public List<Employee> findByEmpAndDept(String empName, String deptName){
+		
+		return employeeRepo.findByFirstNameContainingAndDepartmentNameContaining(empName, deptName);
+	}
+	
+	public Long countByEmpAndDept(String empName, String deptName) {
 
-	public List<Employee> filter(String name) {
+		return employeeRepo.countByFirstNameContainingAndDepartmentNameContaining(empName, deptName);
+	}
 
-		return employeeRepo.filterNative(name);
+	
+	public Long deleteByEmpAndDept(String empName, String deptName) {
+
+		return employeeRepo.deleteByFirstNameContainingAndDepartmentNameContaining(empName, deptName);
+	}
+	
+	
+	public Page<Employee> filter(String name ,int pageNum, int pageSize, String sortCol, Boolean isAsc) {
+
+		if (name.isEmpty() || name.isBlank() || name == null) {
+			name = null;
+		}
+		
+		// Sort object with List of Order objects.
+//		List<Order> orders = new ArrayList<Order>();
+//
+//		Order order1 = new Order(isAsc ? Direction.ASC : Direction.DESC, sortCol);
+//		orders.add(order1);
+//
+//		Order order2 = new Order(Sort.Direction.ASC, "title");
+//		orders.add(order2);
+		
+		Pageable page = PageRequest.of(pageNum, pageSize, Sort.by(isAsc ? Direction.ASC : Direction.DESC  ,sortCol));
+		
+		return employeeRepo.filter(name, page);
 	}
 
 	public Employee insert(Employee emp) {
@@ -45,7 +85,8 @@ public class EmployeeService {
 
 		Employee current = employeeRepo.findById(emp.getId()).orElseThrow();
 
-		current.setName(emp.getName());
+		current.setFirstName(emp.getFirstName());
+		current.setLastName(emp.getLastName());
 		current.setSalary(emp.getSalary());
 		current.setDepartment(emp.getDepartment());
 
@@ -60,6 +101,17 @@ public class EmployeeService {
 	public List<Employee> findAll() {
 
 		return employeeRepo.findAll();
+	}
+	
+	public List<Employee> findBySalary (Double salary, String name){
+		
+		return employeeRepo.findBySalary(salary, name);
+	}
+	
+	public HRStatisticProjection getHRStatistic () {
+		
+		return employeeRepo.getHRStatistic();
+				
 	}
 
 }

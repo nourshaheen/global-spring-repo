@@ -1,38 +1,61 @@
 package com.global.hr.entity;
 
+import java.util.Date;
+
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EntityResult;
 import javax.persistence.FetchType;
+import javax.persistence.FieldResult;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.NamedNativeQuery;
+import javax.persistence.NamedQuery;
 import javax.persistence.OneToOne;
+import javax.persistence.SqlResultSetMapping;
 import javax.persistence.Table;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-
-@Table(name = "hr_employees")
+@Table(name = "actor")
 @Entity
+@NamedQuery(name = "Employee.findBySalary" , query = "select emp from Employee emp where emp.salary"
+		+ " >= :salary and name like :name")
+
+//@SqlResultSetMapping(
+//        name = "empMapping",
+//        entities = @EntityResult(
+//                entityClass = Employee.class,
+//                fields = {
+//                    @FieldResult(name = "id", column = "emp_id"),
+//                    @FieldResult(name = "name", column = "emp_name"),
+//                    @FieldResult(name = "salary", column = "salary")}))
+//
+//@NamedNativeQuery(name = "Employee.findByDepartment" , query = "select emp.emp_id, emp.emp_name, emp.salary"
+//		+ " from hr_employees emp where emp.department_id = :deptId", resultSetMapping = "empMapping")
 public class Employee {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "emp_id")
+	@Column(name = "actor_id")
 	private Long id;
 
-	@Column(name = "emp_name")
-	private String name;
+	@Column(name = "first_name")
+	private String firstName;
+	
+	private String lastName;
+	
+	private Date lastupdate;
 
 	private Double salary;
 
-	@ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
+	@ManyToOne()
 	@JoinColumn(name = "department_id")
 	private Department department;
 	
-	@OneToOne(cascade = CascadeType.ALL , fetch = FetchType.EAGER)
+	@OneToOne()
 	@JoinColumn(name = "user_id")
 	private User user;
 
@@ -44,12 +67,28 @@ public class Employee {
 		this.id = id;
 	}
 
-	public String getName() {
-		return name;
+	public String getFirstName() {
+		return firstName;
 	}
 
-	public void setName(String name) {
-		this.name = name;
+	public void setFirstName(String firstName) {
+		this.firstName = firstName;
+	}
+
+	public String getLastName() {
+		return lastName;
+	}
+
+	public void setLastName(String lastName) {
+		this.lastName = lastName;
+	}
+
+	public Date getLastupdate() {
+		return lastupdate;
+	}
+
+	public void setLastupdate(Date lastupdate) {
+		this.lastupdate = lastupdate;
 	}
 
 	public Double getSalary() {
