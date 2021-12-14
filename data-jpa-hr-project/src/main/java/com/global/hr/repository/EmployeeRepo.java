@@ -14,8 +14,10 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.global.hr.HRStatisticProjection;
 import com.global.hr.entity.Employee;
+import com.global.hr.projection.EmployeeProjection;
 
 @Repository
+@Transactional(readOnly = true)
 public interface EmployeeRepo extends JpaRepository<Employee, Long>{
 	
 	
@@ -28,13 +30,13 @@ public interface EmployeeRepo extends JpaRepository<Employee, Long>{
 	Long countByFirstNameContainingAndDepartmentNameContaining(String empName, String deptName);
 	
 	@Modifying(clearAutomatically = true, flushAutomatically = true)
-	@Transactional()
+	@Transactional(readOnly = false)
 	Long deleteByFirstNameContainingAndDepartmentNameContaining(String empName, String deptName);
 	
 	
 	// this is the JPQL 
 	@Query(value = "select emp from #{#entityName} emp where (:empName is null or emp.firstName like :empName)")
-	Page<Employee> filter(@Param("empName") String name, Pageable pageable);
+	Page<EmployeeProjection> filter(@Param("empName") String name, Pageable pageable);
 	
 	// this is the sql native 
 	@Query(value = "select * from hr_employees emp where emp.first_Name like :empName", nativeQuery = true)

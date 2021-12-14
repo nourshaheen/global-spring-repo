@@ -15,6 +15,7 @@ import org.springframework.stereotype.Service;
 import com.global.hr.HRStatisticProjection;
 import com.global.hr.entity.Department;
 import com.global.hr.entity.Employee;
+import com.global.hr.projection.EmployeeProjection;
 import com.global.hr.repository.EmployeeRepo;
 
 @Service
@@ -48,7 +49,7 @@ public class EmployeeService {
 	}
 	
 	
-	public Page<Employee> filter(String name ,int pageNum, int pageSize, String sortCol, Boolean isAsc) {
+	public Page<EmployeeProjection> filter(String name ,int pageNum, int pageSize, String sortCol, Boolean isAsc) {
 
 		if (name.isEmpty() || name.isBlank() || name == null) {
 			name = null;
@@ -95,7 +96,7 @@ public class EmployeeService {
 
 	public List<Employee> findByDepartmentId(Long deptId) {
 
-		return employeeRepo.findByDepartment(deptId);
+		return employeeRepo.findByDepartmentId(deptId);
 	}
 	
 	public List<Employee> findAll() {
@@ -113,5 +114,8 @@ public class EmployeeService {
 		return employeeRepo.getHRStatistic();
 				
 	}
+	
+	
+	
 
 }

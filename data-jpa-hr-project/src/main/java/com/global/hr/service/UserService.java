@@ -1,10 +1,13 @@
 package com.global.hr.service;
 
+import java.sql.SQLException;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
+import com.global.hr.entity.Role;
 import com.global.hr.entity.User;
 import com.global.hr.repository.UserRepo;
 
@@ -13,6 +16,9 @@ public class UserService {
 
 	@Autowired
 	private UserRepo userRepo;
+	
+	@Autowired
+	private RoleService roleService;
 
 	public User findById(Long id) {
 
@@ -37,6 +43,27 @@ public class UserService {
 	public List<User> findAll() {
 
 		return userRepo.findAll();
+	}
+	
+	@Transactional
+	public void addRoleForAllUsers(String roleName) {
+		
+		// start transaction
+		Role role = roleService.findByName(roleName);
+		
+		findAll().forEach( user ->{
+			
+			user.addRole(role);
+			
+			userRepo.save(user);
+			
+		} );
+		
+		
+		// commit  or rollback
+		
+		// end transaction 
+		
 	}
 
 }

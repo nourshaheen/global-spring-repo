@@ -42,5 +42,11 @@ public class DepartmentService {
 	}
 	
 	
+	public int deleteByName(String deptName) {
+		
+		return departmentRepo.deleteByName(deptName);
+	}
+	
+	
 
 }

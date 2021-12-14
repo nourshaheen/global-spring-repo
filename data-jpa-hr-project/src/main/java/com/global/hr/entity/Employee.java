@@ -44,7 +44,7 @@ public class Employee {
 
 	@Column(name = "first_name")
 	private String firstName;
-	
+
 	private String lastName;
 	
 	private Date lastupdate;
@@ -58,6 +58,18 @@ public class Employee {
 	@OneToOne()
 	@JoinColumn(name = "user_id")
 	private User user;
+	
+	
+	public Employee() {
+		super();
+	}
+	
+	public Employee(Long id, String firstName, String lastName) {
+		super();
+		this.id = id;
+		this.firstName = firstName;
+		this.lastName = lastName;
+	}
 
 	public Long getId() {
 		return id;
