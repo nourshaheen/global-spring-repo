@@ -21,6 +21,11 @@ public class AutherService {
 
 		return autherRepo.findById(id).orElseThrow();
 	}
+	
+	public Auther getById(Long id) {
+
+		return autherRepo.getById(id);
+	}
 
 	public List<Auther> findAll() {
 
@@ -35,6 +40,12 @@ public class AutherService {
 		}
 
 		return autherRepo.save(entity);
+	}
+	
+	
+	public List<Auther> insertAll(List<Auther> entity) {
+
+		return autherRepo.saveAll(entity);
 	}
 
 	public Auther update(Auther entity) {
