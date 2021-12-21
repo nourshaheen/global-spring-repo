@@ -4,37 +4,18 @@ import java.util.List;
 
 import org.springframework.stereotype.Service;
 
+import com.global.book.base.BaseService;
 import com.global.book.entity.Book;
 import com.global.book.repository.BookRepo;
 
 @Service
-public class BookService {
+public class BookService extends BaseService<Book, Long> {
 
 	private BookRepo bookRepo;
 
 	public BookService(BookRepo bookRepo) {
 		super();
 		this.bookRepo = bookRepo;
-	}
-
-	public Book findById(Long id) {
-
-		return bookRepo.findById(id).orElseThrow();
-	}
-
-	public List<Book> findAll() {
-
-		return bookRepo.findAll();
-	}
-
-	public Book insert(Book entity) {
-
-		if (entity.getId() != null) {
-
-			throw new RuntimeException();
-		}
-
-		return bookRepo.save(entity);
 	}
 	
 	
@@ -49,13 +30,9 @@ public class BookService {
 
 		book.setName(entity.getName());
 
-		return bookRepo.save(book);
+		return update(book);
 	}
 
-	public void deleteById(Long id) {
-
-		bookRepo.deleteById(id);
-	}
 	
 	public int deleteByAutherId (Long id) {
 		

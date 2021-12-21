@@ -10,10 +10,12 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.global.book.base.BaseRepository;
 import com.global.book.entity.Book;
+import com.global.book.entity.BookDto;
 
 @Repository
-public interface BookRepo extends JpaRepository<Book, Long> {
+public interface BookRepo extends BaseRepository<Book, Long> {
 	
 	@Override
 	@EntityGraph(value = "loadAuther")

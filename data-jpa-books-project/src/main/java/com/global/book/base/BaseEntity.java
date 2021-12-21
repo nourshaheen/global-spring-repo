@@ -24,6 +24,8 @@ public abstract class BaseEntity <ID> {
 	@Column(name = "id")
 	private ID id;
 	
+	private String statusCode;
+	
 	@CreatedBy
 	private String createdBy;
 	
@@ -74,6 +76,14 @@ public abstract class BaseEntity <ID> {
 
 	public void setLastModifiedDate(LocalDateTime lastModifiedDate) {
 		this.lastModifiedDate = lastModifiedDate;
+	}
+
+	public String getStatusCode() {
+		return statusCode;
+	}
+
+	public void setStatusCode(String statusCode) {
+		this.statusCode = statusCode;
 	}
 	
 
