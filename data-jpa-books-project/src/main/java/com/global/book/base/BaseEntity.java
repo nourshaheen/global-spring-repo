@@ -26,6 +26,8 @@ public abstract class BaseEntity <ID> {
 	
 	private String statusCode;
 	
+	private boolean isDeleted;
+	
 	@CreatedBy
 	private String createdBy;
 	
@@ -84,6 +86,14 @@ public abstract class BaseEntity <ID> {
 
 	public void setStatusCode(String statusCode) {
 		this.statusCode = statusCode;
+	}
+
+	public boolean isDeleted() {
+		return isDeleted;
+	}
+
+	public void setDeleted(boolean isDeleted) {
+		this.isDeleted = isDeleted;
 	}
 	
 

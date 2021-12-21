@@ -11,11 +11,14 @@ import javax.persistence.Table;
 import javax.persistence.Transient;
 
 import org.hibernate.annotations.Formula;
+import org.hibernate.annotations.SQLDelete;
+import org.hibernate.annotations.Where;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.global.book.base.BaseEntity;
 
-
+@SQLDelete(sql = "update books set is_deleted = true where id = ?")
+@Where(clause = "is_deleted = false")
 @NamedEntityGraph(name = "loadAuther" , attributeNodes = @NamedAttributeNode("auther"))
 @Entity
 @Table(name = "books")

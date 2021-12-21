@@ -30,5 +30,11 @@ public interface BookRepo extends BaseRepository<Book, Long> {
 	@Query("delete from Book where auther.id = :id")
 	int deleteByAutherId (Long id);
 	
+	
+	@Transactional
+	@Query(value = "UPDATE Book b SET b.isDeleted = false WHERE b.auther.id = ?1")
+	@Modifying
+	public void restoreByAuthorId(Long autherId);
+	
 
 }

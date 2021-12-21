@@ -3,15 +3,20 @@ package com.global.book.entity;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import org.hibernate.annotations.Formula;
+import org.hibernate.annotations.SQLDelete;
+import org.hibernate.annotations.Where;
 
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.global.book.base.BaseEntity;
 
+@SQLDelete(sql = "update authers set is_deleted = true where id = ?")
+@Where(clause = "is_deleted = false")
 @Entity
 @Table(name = "authers")
 public class Auther extends BaseEntity<Long> {
@@ -22,7 +27,7 @@ public class Auther extends BaseEntity<Long> {
 	private long bookCount;
 	
 	@JsonManagedReference
-	@OneToMany(mappedBy = "auther")
+	@OneToMany(mappedBy = "auther" , cascade = CascadeType.ALL)
 	private List<Book> books = new ArrayList<>();
 	
 	
