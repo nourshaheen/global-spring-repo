@@ -1,5 +1,6 @@
 package com.global.book.repository;
 
+import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
@@ -9,7 +10,7 @@ import com.global.book.base.BaseRepository;
 import com.global.book.entity.Auther;
 
 @Repository
-public interface AutherRepo extends BaseRepository<Auther, Long> {
+public interface AutherRepo extends BaseRepository<Auther, Long>, JpaSpecificationExecutor<Auther> {
 	
 	
 	@Transactional

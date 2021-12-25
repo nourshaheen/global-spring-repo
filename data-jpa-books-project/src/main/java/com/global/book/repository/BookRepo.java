@@ -7,6 +7,8 @@ import org.springframework.data.jpa.repository.EntityGraph;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.jpa.repository.query.Procedure;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -42,6 +44,20 @@ public interface BookRepo extends BaseRepository<Book, Long> {
 	@Query(value = "UPDATE Book b SET b.isDeleted = false WHERE b.auther.id = ?1")
 	@Modifying
 	public void restoreByAuthorId(Long autherId);
+	
+	
+	//Map a Stored Procedure Name Directly
+	@Procedure
+	int GET_BOOK_BY_AUTHER(String auther_id_in);
+
+	@Procedure("GET_BOOK_BY_AUTHER")
+	int getTotalCarsByModel(String auther_id_in);
+	
+	int getBookByAuther(String auther_id_in);
+	
+	//Stored Procedure with @Query Annotation
+	@Query(value = "CALL GET_BOOK_BY_AUTHER(:auther_id_in);", nativeQuery = true)
+	List<Book> findCarsAfterYear(@Param("auther_id_in") Integer year_in);
 	
 
 }

@@ -6,13 +6,13 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedAttributeNode;
 import javax.persistence.NamedEntityGraph;
+import javax.persistence.NamedStoredProcedureQuery;
+import javax.persistence.ParameterMode;
 import javax.persistence.PostLoad;
+import javax.persistence.StoredProcedureParameter;
 import javax.persistence.Table;
 import javax.persistence.Transient;
-import javax.validation.constraints.Max;
-import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Pattern;
 
 import org.hibernate.annotations.Formula;
 import org.hibernate.annotations.SQLDelete;
@@ -20,6 +20,14 @@ import org.hibernate.annotations.Where;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.global.book.base.BaseEntity;
+
+
+
+//NamedStoredProcedureQuery
+@NamedStoredProcedureQuery(name = "Book.getBookByAuther", 
+procedureName = "GET_BOOK_BY_AUTHER", parameters = {
+ @StoredProcedureParameter(mode = ParameterMode.IN, name = "auther_id_in", type = String.class),
+ @StoredProcedureParameter(mode = ParameterMode.OUT, name = "book_count", type = Integer.class)})
 
 @SQLDelete(sql = "update books set is_deleted = true where id = ?")
 @Where(clause = "is_deleted = false")
