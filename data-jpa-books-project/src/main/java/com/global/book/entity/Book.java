@@ -9,6 +9,10 @@ import javax.persistence.NamedEntityGraph;
 import javax.persistence.PostLoad;
 import javax.persistence.Table;
 import javax.persistence.Transient;
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
 
 import org.hibernate.annotations.Formula;
 import org.hibernate.annotations.SQLDelete;
@@ -24,8 +28,10 @@ import com.global.book.base.BaseEntity;
 @Table(name = "books")
 public class Book extends BaseEntity<Long> {
 	
+	@NotNull(message = "Should be enter book name")
 	private String name ;
 	
+//	@Pattern(regexp = "")
 	private double price;
 	
 	@Transient
@@ -34,6 +40,7 @@ public class Book extends BaseEntity<Long> {
 	@Formula("(select count(*) from books)")
 	private long bookCount;
 	
+	@NotNull
 	@JsonBackReference
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "auther_id")

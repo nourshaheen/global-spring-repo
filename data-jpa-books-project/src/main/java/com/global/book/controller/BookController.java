@@ -1,5 +1,7 @@
 package com.global.book.controller;
 
+import javax.validation.Valid;
+
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -47,13 +49,18 @@ public class BookController {
 	}
 
 	@PostMapping("")
-	public ResponseEntity<?> insert(@RequestBody Book entity) {
+	public ResponseEntity<?> insert(@RequestBody @Valid BookDto dto) {
+		
+		Book book = new Book();
+		book.setName(dto.getName());
+		book.setPrice(dto.getPrice());
+		book.setAuther(dto.getAuther());
 
-		return ResponseEntity.ok(bookService.insert(entity));
+		return ResponseEntity.ok(bookService.insert(book));
 	}
 
 	@PutMapping("")
-	public ResponseEntity<?> update(@RequestBody Book entity) {
+	public ResponseEntity<?> update(@RequestBody @Valid Book entity) {
 
 		return ResponseEntity.ok(bookService.update(entity));
 	}
