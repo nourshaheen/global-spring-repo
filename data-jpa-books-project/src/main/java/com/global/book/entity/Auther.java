@@ -9,9 +9,6 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Pattern;
 
 import org.hibernate.annotations.Formula;
 import org.hibernate.annotations.SQLDelete;
@@ -19,6 +16,7 @@ import org.hibernate.annotations.Where;
 
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.global.book.base.BaseEntity;
+import com.global.book.validator.IpAddress;
 
 @SQLDelete(sql = "update authers set is_deleted = true where id = ?")
 @Where(clause = "is_deleted = false")
@@ -29,7 +27,8 @@ public class Auther extends BaseEntity<Long> {
 	@NotBlank
 	private String name;
 	
-	@Pattern(regexp = "^([0-9]{1,3})\\.([0-9]{1,3})\\.([0-9]{1,3})\\.([0-9]{1,3})$")
+//	@Pattern(regexp = "^([0-9]{1,3})\\.([0-9]{1,3})\\.([0-9]{1,3})\\.([0-9]{1,3})$")
+	@IpAddress(message = "Should be enter vaild ip address")
 	private String ipAddress;
 	
 	@Email
