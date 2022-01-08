@@ -24,6 +24,7 @@ public class StartupApp implements CommandLineRunner {
 	public void run(String... args) throws Exception {
 
 		// adding some data for authers
+		if (autherService.findAll().isEmpty()) {
 		Auther auther1 = new Auther();
 		auther1.setName("Ali");
 
@@ -34,8 +35,9 @@ public class StartupApp implements CommandLineRunner {
 		auther3.setName("Ahmed");
 
 		autherService.insertAll(Arrays.asList(auther1, auther2, auther3));
-
+		}
 		// adding some data for books
+		if(bookService.findAll().isEmpty()) {
 		Book book = new Book();
 		book.setName("Java JPA");
 		book.setPrice(200);
@@ -53,6 +55,7 @@ public class StartupApp implements CommandLineRunner {
 
 
 		bookService.insertAll(Arrays.asList(book,book2, book3));
+		}
 	}
 
 }

@@ -1,10 +1,13 @@
 package com.global.book.base;
 
 import java.util.List;
+import java.util.Optional;
 
 import javax.persistence.MappedSuperclass;
 
 import org.springframework.beans.factory.annotation.Autowired;
+
+import com.global.book.error.RecoredNotFoundExecption;
 
 @MappedSuperclass
 public class BaseService<T extends BaseEntity<ID>, ID extends Number> {
@@ -14,7 +17,13 @@ public class BaseService<T extends BaseEntity<ID>, ID extends Number> {
 
 	public T findById(ID id) {
 
-		return baseRepository.findById(id).orElseThrow();
+		Optional<T> entity = baseRepository.findById(id);
+		if (entity.isPresent()) {
+			return entity.get();
+		} else {
+			throw new RecoredNotFoundExecption("This recored with id:- " + id + " not found");
+		}
+
 	}
 
 	public T getById(ID id) {
