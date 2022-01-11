@@ -1,11 +1,15 @@
 package com.global.book.base;
 
 import java.util.List;
+import java.util.Locale;
 import java.util.Optional;
 
 import javax.persistence.MappedSuperclass;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cglib.core.Local;
+import org.springframework.context.MessageSource;
+import org.springframework.context.i18n.LocaleContextHolder;
 
 import com.global.book.error.RecoredNotFoundExecption;
 
@@ -14,6 +18,9 @@ public class BaseService<T extends BaseEntity<ID>, ID extends Number> {
 
 	@Autowired
 	private BaseRepository<T, ID> baseRepository;
+	
+	@Autowired
+	private MessageSource messageSource;
 
 	public T findById(ID id) {
 
@@ -21,7 +28,12 @@ public class BaseService<T extends BaseEntity<ID>, ID extends Number> {
 		if (entity.isPresent()) {
 			return entity.get();
 		} else {
-			throw new RecoredNotFoundExecption("This recored with id:- " + id + " not found");
+//			Locale local = new Locale("en");
+			String [] msgParam = {id.toString()};
+			String msg = messageSource.getMessage("validation.recoredNotFound.message", msgParam
+					, LocaleContextHolder.getLocale());
+			
+			throw new RecoredNotFoundExecption(msg);
 		}
 
 	}

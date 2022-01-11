@@ -28,10 +28,10 @@ public class Auther extends BaseEntity<Long> {
 	private String name;
 	
 //	@Pattern(regexp = "^([0-9]{1,3})\\.([0-9]{1,3})\\.([0-9]{1,3})\\.([0-9]{1,3})$")
-	@IpAddress(message = "Should be enter vaild ip address")
+	@IpAddress()
 	private String ipAddress;
 	
-	@Email
+	@Email(message = "{validation.constraints.email.message}")
 	private String email;
 	
 	@Formula("(select count(*) from books book where book.auther_id = id)")
