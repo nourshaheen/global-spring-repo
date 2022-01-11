@@ -11,6 +11,7 @@ import org.springframework.cglib.core.Local;
 import org.springframework.context.MessageSource;
 import org.springframework.context.i18n.LocaleContextHolder;
 
+import com.global.book.config.MessageUtils;
 import com.global.book.error.RecoredNotFoundExecption;
 
 @MappedSuperclass
@@ -20,7 +21,7 @@ public class BaseService<T extends BaseEntity<ID>, ID extends Number> {
 	private BaseRepository<T, ID> baseRepository;
 	
 	@Autowired
-	private MessageSource messageSource;
+	private MessageUtils messageUtils;
 
 	public T findById(ID id) {
 
@@ -30,8 +31,7 @@ public class BaseService<T extends BaseEntity<ID>, ID extends Number> {
 		} else {
 //			Locale local = new Locale("en");
 			String [] msgParam = {id.toString()};
-			String msg = messageSource.getMessage("validation.recoredNotFound.message", msgParam
-					, LocaleContextHolder.getLocale());
+			String msg = messageUtils.getMessage("validation.recoredNotFound.message", msgParam);
 			
 			throw new RecoredNotFoundExecption(msg);
 		}
