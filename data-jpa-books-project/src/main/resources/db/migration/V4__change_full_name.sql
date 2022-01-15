@@ -1,0 +1,3 @@
+
+
+ALTER TABLE authers CHANGE COLUMN auther_name full_name VARCHAR(255) NULL DEFAULT NULL ;

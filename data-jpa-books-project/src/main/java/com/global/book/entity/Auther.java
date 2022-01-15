@@ -25,7 +25,7 @@ import com.global.book.validator.IpAddress;
 public class Auther extends BaseEntity<Long> {
 		
 	@NotBlank
-	private String name;
+	private String fullName;
 	
 //	@Pattern(regexp = "^([0-9]{1,3})\\.([0-9]{1,3})\\.([0-9]{1,3})\\.([0-9]{1,3})$")
 	@IpAddress()
@@ -49,14 +49,6 @@ public class Auther extends BaseEntity<Long> {
 	
 	public void removeBook (Book book) {
 		books.remove(book);
-	}
-
-	public String getName() {
-		return name;
-	}
-
-	public void setName(String name) {
-		this.name = name;
 	}
 
 	public List<Book> getBooks() {
@@ -89,6 +81,14 @@ public class Auther extends BaseEntity<Long> {
 
 	public void setEmail(String email) {
 		this.email = email;
+	}
+
+	public String getFullName() {
+		return fullName;
+	}
+
+	public void setFullName(String autherName) {
+		this.fullName = autherName;
 	}
 
 

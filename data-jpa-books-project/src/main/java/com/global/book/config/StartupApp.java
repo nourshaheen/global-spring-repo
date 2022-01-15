@@ -26,13 +26,13 @@ public class StartupApp implements CommandLineRunner {
 		// adding some data for authers
 		if (autherService.findAll().isEmpty()) {
 		Auther auther1 = new Auther();
-		auther1.setName("Ali");
+		auther1.setFullName("ALi");
 
 		Auther auther2 = new Auther();
-		auther2.setName("Mohamed");
+		auther2.setFullName("Mohamed");
 
 		Auther auther3 = new Auther();
-		auther3.setName("Ahmed");
+		auther3.setFullName("Ahmed");
 
 		autherService.insertAll(Arrays.asList(auther1, auther2, auther3));
 		}
