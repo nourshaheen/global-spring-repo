@@ -18,6 +18,9 @@ import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.global.book.base.BaseEntity;
 import com.global.book.validator.IpAddress;
 
+import io.swagger.v3.oas.annotations.media.Schema;
+
+@Schema(name = "Auther Entity")
 @SQLDelete(sql = "update authers set is_deleted = true where id = ?")
 @Where(clause = "is_deleted = false")
 @Entity

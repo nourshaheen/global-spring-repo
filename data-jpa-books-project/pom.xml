@@ -19,6 +19,7 @@
 		<java.version>11</java.version>
 		<aws-java-sdk.version>1.11.750</aws-java-sdk.version>
 		<google-cloud-storage>2.3.0</google-cloud-storage>
+		<springdoc.version>1.6.4</springdoc.version>
 	</properties>
 	
 	<dependencies>
@@ -103,6 +104,13 @@
 		    <groupId>com.google.cloud</groupId>
 		    <artifactId>google-cloud-storage</artifactId>
 		    <version>${google-cloud-storage}</version>
+		</dependency>
+		
+		
+		<dependency>
+		    <groupId>org.springdoc</groupId>
+		    <artifactId>springdoc-openapi-ui</artifactId>
+		    <version>${springdoc.version}</version>
 		</dependency>
 		
 		
