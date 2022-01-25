@@ -13,6 +13,7 @@ import org.springframework.context.support.ReloadableResourceBundleMessageSource
 import org.springframework.data.domain.AuditorAware;
 import org.springframework.data.jpa.repository.config.EnableJpaAuditing;
 import org.springframework.validation.beanvalidation.LocalValidatorFactoryBean;
+import org.springframework.web.client.RestTemplate;
 import org.springframework.web.servlet.LocaleResolver;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
@@ -32,6 +33,12 @@ public class WebConfig implements WebMvcConfigurer {
 	@Bean
 	public AuditorAware<String> auditorAware() {
 		return new AuditorAwareImpl();
+	}
+	
+	@Bean
+	public RestTemplate getRestTemplate() {
+		
+		return new RestTemplate();
 	}
 	
 	@Bean
