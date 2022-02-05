@@ -47,10 +47,11 @@ public class AutherService extends BaseService<Auther, Long> {
 	@Override
 	public Auther update(Auther entity) {
 
+		// before
 		Auther auther = findById(entity.getId());
 
 		auther.setFullName(entity.getFullName());
-
+//wererwe
 		return super.update(auther);
 	}
 
