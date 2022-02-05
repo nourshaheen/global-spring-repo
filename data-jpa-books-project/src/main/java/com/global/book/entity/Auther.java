@@ -41,28 +41,28 @@ public class Auther extends BaseEntity<Long> {
 	private long bookCount;
 	
 //	@NotEmpty
-	@JsonManagedReference
-	@OneToMany(mappedBy = "auther" , cascade = CascadeType.ALL)
-	private List<Book> books = new ArrayList<>();
+//	@JsonManagedReference
+//	@OneToMany(mappedBy = "auther" , cascade = CascadeType.ALL)
+//	private List<Book> books = new ArrayList<>();
 	
 	private String imagePath;
 	
 	
-	public void addBook (Book book) {
-		books.add(book);
-	}
-	
-	public void removeBook (Book book) {
-		books.remove(book);
-	}
-
-	public List<Book> getBooks() {
-		return books;
-	}
-
-	public void setBooks(List<Book> books) {
-		this.books = books;
-	}
+//	public void addBook (Book book) {
+//		books.add(book);
+//	}
+//	
+//	public void removeBook (Book book) {
+//		books.remove(book);
+//	}
+//
+//	public List<Book> getBooks() {
+//		return books;
+//	}
+//
+//	public void setBooks(List<Book> books) {
+//		this.books = books;
+//	}
 
 	public long getBookCount() {
 		return bookCount;

@@ -1,6 +1,7 @@
 package com.global.book.base;
 
 import java.time.LocalDateTime;
+import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.EntityListeners;
@@ -32,13 +33,13 @@ public abstract class BaseEntity <ID> {
 	private String createdBy;
 	
 	@CreatedDate
-	private LocalDateTime createdDate;
+	private Date createdDate;
 	
 	@LastModifiedBy
     private String lastModifiedBy;
 	
 	@LastModifiedDate
-	private LocalDateTime lastModifiedDate;
+	private Date lastModifiedDate;
 
 	public ID getId() {
 		return id;
@@ -56,11 +57,11 @@ public abstract class BaseEntity <ID> {
 		this.createdBy = createdBy;
 	}
 
-	public LocalDateTime getCreatedDate() {
+	public Date getCreatedDate() {
 		return createdDate;
 	}
 
-	public void setCreatedDate(LocalDateTime createdDate) {
+	public void setCreatedDate(Date createdDate) {
 		this.createdDate = createdDate;
 	}
 
@@ -72,11 +73,11 @@ public abstract class BaseEntity <ID> {
 		this.lastModifiedBy = lastModifiedBy;
 	}
 
-	public LocalDateTime getLastModifiedDate() {
+	public Date getLastModifiedDate() {
 		return lastModifiedDate;
 	}
 
-	public void setLastModifiedDate(LocalDateTime lastModifiedDate) {
+	public void setLastModifiedDate(Date lastModifiedDate) {
 		this.lastModifiedDate = lastModifiedDate;
 	}
 

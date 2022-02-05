@@ -34,20 +34,20 @@ public class LoggingAspect {
 	@Pointcut(value = "forRepositoryLog() || forServiceLog() || forControllerLog()")
 	public void forAllApp() {}
 	
-	@Before(value = "forAllApp()")
-	public void beforMethod(JoinPoint joinPoint) {
-		
-		String methodName = joinPoint.getSignature().toShortString();
-		
-		log.info("====>  Method Name is >> {}" , methodName );
-		
-		Object [] args = joinPoint.getArgs();
-		
-		for (Object arg : args) {
-			
-			log.info("===> argument >> {}" , arg);
-		}
-		
-	}
+//	@Before(value = "forAllApp()")
+//	public void beforMethod(JoinPoint joinPoint) {
+//		
+//		String methodName = joinPoint.getSignature().toShortString();
+//		
+//		log.info("====>  Method Name is >> {}" , methodName );
+//		
+//		Object [] args = joinPoint.getArgs();
+//		
+//		for (Object arg : args) {
+//			
+//			log.info("===> argument >> {}" , arg);
+//		}
+//		
+//	}
 
 }

@@ -1,11 +1,12 @@
 package com.global.book.config;
 
-import java.util.Locale;
+import java.time.Duration;
 
 import javax.sql.DataSource;
 
 import org.flywaydb.core.Flyway;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.EnableCaching;
 import org.springframework.context.MessageSource;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -13,15 +14,15 @@ import org.springframework.context.annotation.EnableAspectJAutoProxy;
 import org.springframework.context.support.ReloadableResourceBundleMessageSource;
 import org.springframework.data.domain.AuditorAware;
 import org.springframework.data.jpa.repository.config.EnableJpaAuditing;
+import org.springframework.data.redis.cache.RedisCacheConfiguration;
+import org.springframework.data.redis.serializer.GenericJackson2JsonRedisSerializer;
+import org.springframework.data.redis.serializer.RedisSerializationContext.SerializationPair;
 import org.springframework.validation.beanvalidation.LocalValidatorFactoryBean;
 import org.springframework.web.client.RestTemplate;
-import org.springframework.web.servlet.LocaleResolver;
-import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
-import org.springframework.web.servlet.i18n.LocaleChangeInterceptor;
-import org.springframework.web.servlet.i18n.SessionLocaleResolver;
 
 @Configuration
+@EnableCaching
 @EnableAspectJAutoProxy()
 @EnableJpaAuditing(auditorAwareRef = "auditorAware")
 public class WebConfig implements WebMvcConfigurer {
@@ -85,6 +86,15 @@ public class WebConfig implements WebMvcConfigurer {
 //	public void addInterceptors(InterceptorRegistry registry) {
 //	    registry.addInterceptor(localeChangeInterceptor());
 //	}
+	
+	
+	@Bean
+	public RedisCacheConfiguration cacheConfiguration() {
+	    return RedisCacheConfiguration.defaultCacheConfig()
+	      .entryTtl(Duration.ofMinutes(60))
+	      .disableCachingNullValues()
+	      .serializeValuesWith(SerializationPair.fromSerializer(new GenericJackson2JsonRedisSerializer()));
+	}
 	
 	
 }

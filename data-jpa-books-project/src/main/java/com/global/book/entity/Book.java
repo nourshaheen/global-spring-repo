@@ -50,7 +50,7 @@ public class Book extends BaseEntity<Long> {
 	
 	@NotNull
 	@JsonBackReference
-	@ManyToOne(fetch = FetchType.LAZY)
+	@ManyToOne()
 	@JoinColumn(name = "auther_id")
 	private Auther auther;
 	

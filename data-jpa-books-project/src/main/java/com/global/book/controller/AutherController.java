@@ -51,13 +51,13 @@ public class AutherController {
 			  @ApiResponse(responseCode = "404", description = "Book not found", 
 			    content = @Content) })
 	@GetMapping("/{id}")
-	public ResponseEntity<?> findById(@Parameter(example = "20", name = "Book Id") @PathVariable @Min(value = 10) @Max(value = 200) Long id) {
+	public ResponseEntity<?> findById(@Parameter(example = "20", name = "Book Id") @PathVariable @Min(value = 1) @Max(value = 200) Long id) {
 
 		return ResponseEntity.ok(autherService.findById(id));
 	}
 	
 	@Operation(summary = "Get a book by its email")
-	@GetMapping("/{email}")
+	@GetMapping("/email/{email}")
 	public ResponseEntity<?> findByEmail(@PathVariable String email) {
 
 		return ResponseEntity.ok(autherService.findByEmail(email));

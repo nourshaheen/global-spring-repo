@@ -7,6 +7,10 @@ import java.util.concurrent.CompletableFuture;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.CachePut;
+import org.springframework.cache.annotation.Cacheable;
+import org.springframework.cache.annotation.Caching;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
 
@@ -24,16 +28,33 @@ public class AutherService extends BaseService<Auther, Long> {
 	private AutherRepo autherRepo;
 	
 	Logger log = LoggerFactory.getLogger(AutherService.class);
+	
+	@Override
+	@Cacheable(value = "auther", key = "#root.methodName")
+	public List<Auther> findAll() {
+		// TODO Auto-generated method stub
+		return super.findAll();
+	}
+	
+	
+	@Override
+	@Cacheable(value = "auther", key = "#id")
+//	@CachePut(value = "auther", key = "#id")
+	public Auther findById(Long id) {
+		// TODO Auto-generated method stub
+		return super.findById(id);
+	}
 
 	@Override
+	@CacheEvict(value = {"auther"} , key ="#root.methodName", allEntries = true)
 	public Auther insert(Auther entity) {
 		
 	if (!entity.getEmail().isEmpty() && entity.getEmail() != null) {
-		CompletableFuture<Auther> auther = findByEmail(entity.getEmail());
+		Optional<Auther> auther = findByEmail(entity.getEmail());
 		
 		log.info("author name is {} and email is {} " , entity.getFullName() , entity.getEmail());
 				
-		if(auther.isDone()) {
+		if(auther.isPresent()) {
 			
 			log.error("This email already found with anther author");
 			throw new DaplicateRecoredException("This email already found with anther author");
@@ -45,13 +66,12 @@ public class AutherService extends BaseService<Auther, Long> {
 	}
 
 	@Override
+	@CacheEvict(value = {"auther"} , key ="#root.methodName", allEntries = true)
 	public Auther update(Auther entity) {
 
-		// before
 		Auther auther = findById(entity.getId());
 
 		auther.setFullName(entity.getFullName());
-//wererwe
 		return super.update(auther);
 	}
 
@@ -64,9 +84,10 @@ public class AutherService extends BaseService<Auther, Long> {
 	}
 
 	@Async(value = "threadPoolTaskExecutor")
-	public CompletableFuture<Auther> findByEmail(String email) {
+	@Cacheable(value = "auther", key = "#email")
+	public Optional<Auther> findByEmail(String email) {
 
-		return CompletableFuture.completedFuture(autherRepo.findByEmail(email).get());
+		return autherRepo.findByEmail(email);
 	}
 
 }
