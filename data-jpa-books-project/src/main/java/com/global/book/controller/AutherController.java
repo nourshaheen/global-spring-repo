@@ -1,9 +1,11 @@
 package com.global.book.controller;
 
+import javax.persistence.EntityManager;
 import javax.validation.Valid;
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
 
+import org.springframework.core.env.Environment;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -18,7 +20,9 @@ import org.springframework.web.bind.annotation.RestController;
 import com.global.book.entity.Auther;
 import com.global.book.entity.AutherSearch;
 import com.global.book.entity.Book;
+import com.global.book.repository.BookRepo;
 import com.global.book.service.AutherService;
+import com.global.book.service.BookService;
 
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
@@ -27,19 +31,18 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import lombok.RequiredArgsConstructor;
+import lombok.extern.log4j.Log4j2;
 
 @Tag(name = "Auther Controller")
 @Validated
 @RestController
 @RequestMapping("/auther")
+@RequiredArgsConstructor
 public class AutherController {
 
-	private AutherService autherService;
+	private final AutherService autherService;
 
-	public AutherController(AutherService autherService) {
-		super();
-		this.autherService = autherService;
-	}
 
 	@Operation(summary = "Get a book by its id")
 	@ApiResponses(value = { 

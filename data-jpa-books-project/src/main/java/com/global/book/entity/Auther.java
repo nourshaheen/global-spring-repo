@@ -19,12 +19,23 @@ import com.global.book.base.BaseEntity;
 import com.global.book.validator.IpAddress;
 
 import io.swagger.v3.oas.annotations.media.Schema;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+import lombok.ToString;
 
 @Schema(name = "Auther Entity")
 @SQLDelete(sql = "update authers set is_deleted = true where id = ?")
 @Where(clause = "is_deleted = false")
 @Entity
 @Table(name = "authers")
+@Setter
+@Getter
+@NoArgsConstructor
+@AllArgsConstructor
 public class Auther extends BaseEntity<Long> {
 		
 	@NotBlank
@@ -46,63 +57,5 @@ public class Auther extends BaseEntity<Long> {
 //	private List<Book> books = new ArrayList<>();
 	
 	private String imagePath;
-	
-	
-//	public void addBook (Book book) {
-//		books.add(book);
-//	}
-//	
-//	public void removeBook (Book book) {
-//		books.remove(book);
-//	}
-//
-//	public List<Book> getBooks() {
-//		return books;
-//	}
-//
-//	public void setBooks(List<Book> books) {
-//		this.books = books;
-//	}
-
-	public long getBookCount() {
-		return bookCount;
-	}
-
-	public void setBookCount(long bookCount) {
-		this.bookCount = bookCount;
-	}
-
-	public String getIpAddress() {
-		return ipAddress;
-	}
-
-	public void setIpAddress(String ipAddress) {
-		this.ipAddress = ipAddress;
-	}
-
-	public String getEmail() {
-		return email;
-	}
-
-	public void setEmail(String email) {
-		this.email = email;
-	}
-
-	public String getFullName() {
-		return fullName;
-	}
-
-	public void setFullName(String autherName) {
-		this.fullName = autherName;
-	}
-
-	public String getImagePath() {
-		return imagePath;
-	}
-
-	public void setImagePath(String imagePath) {
-		this.imagePath = imagePath;
-	}
-
 
 }

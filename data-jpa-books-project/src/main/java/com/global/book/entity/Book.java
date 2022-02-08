@@ -21,6 +21,11 @@ import org.hibernate.annotations.Where;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.global.book.base.BaseEntity;
 
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
 
 
 //NamedStoredProcedureQuery
@@ -34,6 +39,10 @@ procedureName = "GET_BOOK_BY_AUTHER", parameters = {
 @NamedEntityGraph(name = "loadAuther" , attributeNodes = @NamedAttributeNode("auther"))
 @Entity
 @Table(name = "books")
+@Setter
+@Getter
+@NoArgsConstructor
+@AllArgsConstructor
 public class Book extends BaseEntity<Long> {
 	
 	@NotNull(message = "Should be enter book name")
@@ -55,55 +64,5 @@ public class Book extends BaseEntity<Long> {
 	private Auther auther;
 	
 
-	public String getName() {
-		return name;
-	}
-
-	public void setName(String name) {
-		this.name = name;
-	}
-
-	public double getPrice() {
-		return price;
-	}
-
-	public void setPrice(double price) {
-		this.price = price;
-	}
-
-	public Auther getAuther() {
-		return auther;
-	}
-
-	public void setAuther(Auther auther) {
-		this.auther = auther;
-	}
-
-	@Override
-	public String toString() {
-		return "Book [id=" + getId() + ", name=" + name + ", price=" + price + "]";
-	}
-
-	public double getDiscounted() {
-		return price * .25;
-	}
-
-	public void setDiscounted(double discounted) {
-		this.discounted = discounted;
-	}
-	
-	@PostLoad
-	private void calcDiscount() {
-		
-		this.setDiscounted(price * .25);
-	}
-
-	public long getBookCount() {
-		return bookCount;
-	}
-
-	public void setBookCount(long bookCount) {
-		this.bookCount = bookCount;
-	}
 
 }

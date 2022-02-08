@@ -20,7 +20,10 @@
 		<aws-java-sdk.version>1.11.750</aws-java-sdk.version>
 		<google-cloud-storage>2.3.0</google-cloud-storage>
 		<springdoc.version>1.6.4</springdoc.version>
+		
 	</properties>
+	
+	
 	
 	<dependencies>
 		<dependency>
@@ -130,6 +133,12 @@
 			<artifactId>spring-boot-starter-data-redis</artifactId>
 		</dependency>
 		
+		
+	<dependency>
+		<groupId>org.projectlombok</groupId>
+		<artifactId>lombok</artifactId>
+		<scope>provided</scope>
+	</dependency>
 		
 	</dependencies>
 

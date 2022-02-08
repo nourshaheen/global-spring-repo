@@ -6,35 +6,29 @@ import javax.persistence.EntityManager;
 import javax.persistence.ParameterMode;
 import javax.persistence.StoredProcedureQuery;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.env.Environment;
 import org.springframework.stereotype.Service;
 
 import com.global.book.base.BaseService;
 import com.global.book.entity.Book;
+import com.global.book.entity.BookDto;
 import com.global.book.repository.BookRepo;
 
+import lombok.RequiredArgsConstructor;
+import lombok.extern.log4j.Log4j2;
+
 @Service
+@RequiredArgsConstructor
+@Log4j2
 public class BookService extends BaseService<Book, Long> {
 
-	private BookRepo bookRepo;
-	
-	Logger log = LoggerFactory.getLogger(BookService.class);
+	private final BookRepo bookRepo;
 	
     private final static String USERS_PROC = ".INSERT_JP_USERS";
+   
+    private final EntityManager entityManager;
     
-    @Autowired
-    private EntityManager entityManager;
-    
-    @Autowired
-    private Environment env;
-
-	public BookService(BookRepo bookRepo) {
-		super();
-		this.bookRepo = bookRepo;
-	}
+    private final Environment env;
 	
 	
     public Book addUsers(Book book) {
@@ -53,7 +47,7 @@ public class BookService extends BaseService<Book, Long> {
         query.registerStoredProcedureParameter("Profile_Img_Param", String.class, ParameterMode.IN);
         
         query.registerStoredProcedureParameter("Result_Param", Integer.class, ParameterMode.OUT);
-        
+        log.info("=========>> ");
 //        query.setParameter("Email_Param", book.getEmail());
 //        query.setParameter("First_Name_Param", book.getFirstName());
 //        query.setParameter("Middle_Name_Param", book.getMiddleName());
@@ -84,6 +78,13 @@ public class BookService extends BaseService<Book, Long> {
 	
 	
 	public List<Book> insertAll(List<Book> entities) {
+		
+		BookDto dto = BookDto.builder()
+				.id(20L)
+				.name("Java")
+				.price(300.50)
+				.build();
+			
 		
 		return bookRepo.saveAll(entities);
 	}

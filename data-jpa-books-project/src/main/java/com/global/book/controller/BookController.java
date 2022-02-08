@@ -16,16 +16,14 @@ import com.global.book.entity.Book;
 import com.global.book.entity.BookDto;
 import com.global.book.service.BookService;
 
+import lombok.RequiredArgsConstructor;
+
 @RestController
 @RequestMapping("/book")
+@RequiredArgsConstructor
 public class BookController {
 
-	private BookService bookService;
-
-	public BookController(BookService bookService) {
-		super();
-		this.bookService = bookService;
-	}
+	private final BookService bookService;
 
 	@GetMapping("/{id}")
 	public ResponseEntity<?> findById(@PathVariable Long id) {

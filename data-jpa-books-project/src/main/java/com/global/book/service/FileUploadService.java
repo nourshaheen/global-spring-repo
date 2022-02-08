@@ -11,10 +11,13 @@ import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
 import java.util.UUID;
 
+import javax.persistence.EntityManager;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.core.env.Environment;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 import org.springframework.web.multipart.MultipartFile;
@@ -28,6 +31,7 @@ import com.amazonaws.services.s3.model.PutObjectResult;
 import com.amazonaws.util.IOUtils;
 import com.global.book.entity.Auther;
 import com.global.book.error.FileStorageException;
+import com.global.book.repository.BookRepo;
 import com.google.auth.Credentials;
 import com.google.auth.oauth2.GoogleCredentials;
 import com.google.cloud.storage.BlobId;
@@ -35,10 +39,13 @@ import com.google.cloud.storage.BlobInfo;
 import com.google.cloud.storage.Storage;
 import com.google.cloud.storage.StorageOptions;
 
-@Service
-public class FileUploadService {
+import lombok.RequiredArgsConstructor;
+import lombok.extern.log4j.Log4j2;
 
-	Logger log = LoggerFactory.getLogger(FileUploadService.class);
+@Service
+@RequiredArgsConstructor
+@Log4j2
+public class FileUploadService {
 
 	private Path fileStorageLocation;
 
@@ -59,11 +66,9 @@ public class FileUploadService {
 //	@Value("${aws.s3.bucket}")
 	private String awsBucketName;
 
-	@Autowired
-	private AmazonS3 amazonS3;
+	private final AmazonS3 amazonS3;
 
-	@Autowired
-	private AutherService autherService;
+	private final AutherService autherService;
 
 	/**
 	 * 
