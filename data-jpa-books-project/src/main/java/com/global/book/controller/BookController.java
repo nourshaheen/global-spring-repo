@@ -12,8 +12,9 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.global.book.dto.BookDto;
 import com.global.book.entity.Book;
-import com.global.book.entity.BookDto;
+import com.global.book.mapper.BookMapper;
 import com.global.book.service.BookService;
 
 import lombok.RequiredArgsConstructor;
@@ -24,18 +25,14 @@ import lombok.RequiredArgsConstructor;
 public class BookController {
 
 	private final BookService bookService;
+	private final BookMapper bookMapper;
 
 	@GetMapping("/{id}")
 	public ResponseEntity<?> findById(@PathVariable Long id) {
 
 		Book book = bookService.findById(id);
 
-		BookDto dto = new BookDto();
-		dto.setId(book.getId());
-		dto.setName(book.getName());
-		dto.setPrice(book.getPrice());
-
-		dto.setAuther(book.getAuther());
+		BookDto dto = bookMapper.map(book);
 
 		return ResponseEntity.ok(dto);
 	}
@@ -49,10 +46,7 @@ public class BookController {
 	@PostMapping("")
 	public ResponseEntity<?> insert(@RequestBody @Valid BookDto dto) {
 		
-		Book book = new Book();
-		book.setName(dto.getName());
-		book.setPrice(dto.getPrice());
-		book.setAuther(dto.getAuther());
+		Book book = bookMapper.unMap(dto);
 
 		return ResponseEntity.ok(bookService.insert(book));
 	}

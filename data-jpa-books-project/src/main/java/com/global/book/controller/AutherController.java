@@ -17,9 +17,11 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.global.book.dto.AutherDto;
 import com.global.book.entity.Auther;
 import com.global.book.entity.AutherSearch;
 import com.global.book.entity.Book;
+import com.global.book.mapper.AutherMapper;
 import com.global.book.repository.BookRepo;
 import com.global.book.service.AutherService;
 import com.global.book.service.BookService;
@@ -42,28 +44,34 @@ import lombok.extern.log4j.Log4j2;
 public class AutherController {
 
 	private final AutherService autherService;
-
+	private final AutherMapper autherMapper;
 
 	@Operation(summary = "Get a book by its id")
-	@ApiResponses(value = { 
-			  @ApiResponse(responseCode = "200", description = "Found the book", 
-			    content = { @Content(mediaType = "application/json", 
-							schema = @Schema(implementation = Book.class)) }),
-			  @ApiResponse(responseCode = "400", description = "Invalid id supplied", 
-			    content = @Content), 
-			  @ApiResponse(responseCode = "404", description = "Book not found", 
-			    content = @Content) })
+	@ApiResponses(value = {
+			@ApiResponse(responseCode = "200", description = "Found the book", content = {
+					@Content(mediaType = "application/json", schema = @Schema(implementation = Book.class)) }),
+			@ApiResponse(responseCode = "400", description = "Invalid id supplied", content = @Content),
+			@ApiResponse(responseCode = "404", description = "Book not found", content = @Content) })
 	@GetMapping("/{id}")
-	public ResponseEntity<?> findById(@Parameter(example = "20", name = "Book Id") @PathVariable @Min(value = 1) @Max(value = 200) Long id) {
+	public ResponseEntity<?> findById(
+			@Parameter(example = "20", name = "Book Id") @PathVariable @Min(value = 1) @Max(value = 200) Long id) {
 
-		return ResponseEntity.ok(autherService.findById(id));
+		Auther auther = autherService.findById(id);
+
+		AutherDto dto = autherMapper.map(auther);
+
+		return ResponseEntity.ok(dto);
 	}
-	
+
 	@Operation(summary = "Get a book by its email")
 	@GetMapping("/email/{email}")
 	public ResponseEntity<?> findByEmail(@PathVariable String email) {
 
-		return ResponseEntity.ok(autherService.findByEmail(email));
+		Auther auther = autherService.findByEmail(email).get();
+
+		AutherDto dto = autherMapper.map(auther);
+
+		return ResponseEntity.ok(dto);
 	}
 
 	@Operation(summary = "Get all books")
@@ -75,16 +83,27 @@ public class AutherController {
 
 	@Operation(summary = "Add book")
 	@PostMapping("")
-	public ResponseEntity<?> insert(@RequestBody @Valid Auther entity) {
+	public ResponseEntity<?> insert(@RequestBody @Valid AutherDto dto) {
 
-		return ResponseEntity.ok(autherService.insert(entity));
+		Auther auther = autherMapper.unMap(dto);
+
+		Auther entity = autherService.insert(auther);
+
+		AutherDto returnDto = autherMapper.map(entity);
+
+		return ResponseEntity.ok(returnDto);
 	}
 
 	@Operation(summary = "update book")
 	@PutMapping("")
-	public ResponseEntity<?> update(@RequestBody @Valid Auther entity) {
+	public ResponseEntity<?> update(@RequestBody @Valid AutherDto dto) {
+		Auther auther = autherMapper.unMap(dto);
 
-		return ResponseEntity.ok(autherService.update(entity));
+		Auther entity = autherService.update(auther);
+
+		AutherDto returnDto = autherMapper.map(entity);
+
+		return ResponseEntity.ok(returnDto);
 	}
 
 	@Operation(summary = "delete a book by its id")
@@ -96,8 +115,8 @@ public class AutherController {
 
 	@Operation(summary = "Get a book by search ")
 	@PostMapping("/spec")
-	public ResponseEntity<?> findByAutherSpec(@RequestBody AutherSearch search){
-		
+	public ResponseEntity<?> findByAutherSpec(@RequestBody AutherSearch search) {
+
 		return ResponseEntity.ok(autherService.findByAutherSpec(search));
 	}
 }

@@ -10,8 +10,8 @@ import org.springframework.core.env.Environment;
 import org.springframework.stereotype.Service;
 
 import com.global.book.base.BaseService;
+import com.global.book.dto.BookDto;
 import com.global.book.entity.Book;
-import com.global.book.entity.BookDto;
 import com.global.book.repository.BookRepo;
 
 import lombok.RequiredArgsConstructor;
@@ -78,13 +78,6 @@ public class BookService extends BaseService<Book, Long> {
 	
 	
 	public List<Book> insertAll(List<Book> entities) {
-		
-		BookDto dto = BookDto.builder()
-				.id(20L)
-				.name("Java")
-				.price(300.50)
-				.build();
-			
 		
 		return bookRepo.saveAll(entities);
 	}

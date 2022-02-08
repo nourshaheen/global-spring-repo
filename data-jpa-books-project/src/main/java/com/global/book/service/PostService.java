@@ -18,7 +18,7 @@ import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
 import org.springframework.web.client.RestTemplate;
 
-import com.global.book.entity.PostDto;
+import com.global.book.dto.PostDto;
 
 import lombok.RequiredArgsConstructor;
 

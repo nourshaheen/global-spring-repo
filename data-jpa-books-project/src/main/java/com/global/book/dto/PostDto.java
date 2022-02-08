@@ -1,4 +1,4 @@
-package com.global.book.entity;
+package com.global.book.dto;
 
 import java.io.Serializable;
 

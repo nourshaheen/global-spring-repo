@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.global.book.entity.PostDto;
+import com.global.book.dto.PostDto;
 import com.global.book.service.PostService;
 
 import lombok.RequiredArgsConstructor;

@@ -1,9 +1,12 @@
-package com.global.book.entity;
+package com.global.book.dto;
 
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
+
+import com.global.book.base.BaseDto;
+import com.global.book.entity.Auther;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -14,11 +17,9 @@ import lombok.Setter;
 @Getter
 @NoArgsConstructor
 @AllArgsConstructor
-@Builder
-public class BookDto {
-	
-	private Long id;
-	
+//@Builder
+public class BookDto extends BaseDto<Long> {
+		
 	@NotBlank
 	private String name ;
 	
@@ -27,7 +28,11 @@ public class BookDto {
 	private double price;
 	
 	@NotNull
-	private Auther auther;
+	private AutherDto auther;
+	
+	private String autherName;
+	
+	private String autherEmail;
 
 	
 }
