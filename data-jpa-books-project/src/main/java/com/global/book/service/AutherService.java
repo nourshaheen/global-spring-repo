@@ -64,11 +64,11 @@ public class AutherService extends BaseService<Auther, Long> {
 	@Override
 	@CacheEvict(value = {"auther"} , key ="#root.methodName", allEntries = true)
 	public Auther update(Auther entity) {
-
-		Auther auther = findById(entity.getId());
-
-		auther.setFullName(entity.getFullName());
-		return super.update(auther);
+//
+//		Auther auther = findById(entity.getId());
+//
+//		auther.setFullName(entity.getFullName());
+		return super.update(entity);
 	}
 
 	public List<Auther> findByAutherSpec(AutherSearch search) {

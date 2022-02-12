@@ -1,5 +1,7 @@
 package com.global.book.controller;
 
+import java.util.List;
+
 import javax.persistence.EntityManager;
 import javax.validation.Valid;
 import javax.validation.constraints.Max;
@@ -77,8 +79,12 @@ public class AutherController {
 	@Operation(summary = "Get all books")
 	@GetMapping()
 	public ResponseEntity<?> findAll() {
+		
+		List<Auther> authers = autherService.findAll();
+		
+		List<AutherDto> dtos = autherMapper.map(authers);
 
-		return ResponseEntity.ok(autherService.findAll());
+		return ResponseEntity.ok(dtos);
 	}
 
 	@Operation(summary = "Add book")
@@ -97,11 +103,14 @@ public class AutherController {
 	@Operation(summary = "update book")
 	@PutMapping("")
 	public ResponseEntity<?> update(@RequestBody @Valid AutherDto dto) {
-		Auther auther = autherMapper.unMap(dto);
+		
+		Auther entity = autherService.findById(dto.getId());
+		
+		Auther auther = autherMapper.unMap(dto, entity);
 
-		Auther entity = autherService.update(auther);
+		Auther returnEntity = autherService.update(auther);
 
-		AutherDto returnDto = autherMapper.map(entity);
+		AutherDto returnDto = autherMapper.map(returnEntity);
 
 		return ResponseEntity.ok(returnDto);
 	}

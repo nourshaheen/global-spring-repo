@@ -1,5 +1,8 @@
 package com.global.book.mapper;
 
+import java.util.List;
+import java.util.Set;
+
 import org.mapstruct.AfterMapping;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
@@ -20,8 +23,22 @@ public interface AutherMapper {
 	})
 	AutherDto map (Auther entity);
 	
+	List<AutherDto> map (List<Auther> entity);
+	
+	Set<AutherDto> map (Set<Auther> entity);
+	
 	@Mapping(target = "fullName" , source = "name")
 	Auther unMap (AutherDto dto);
+	
+	@Mapping(target = "fullName" , source = "name")
+	@Mapping(target = "id" , ignore = true)
+	@Mapping(target = "imagePath" , ignore = true)
+	@Mapping(target = "bookCount" , ignore = true)
+	@Mapping(target = "statusCode" , ignore = true)
+	@Mapping(target = "deleted" , ignore = true)
+	Auther unMap (AutherDto dto, @MappingTarget Auther t);
+	
+	List<Auther> unMap (List<AutherDto> dto);
 	
 	
 	@AfterMapping

@@ -33,6 +33,8 @@ public class BookDto extends BaseDto<Long> {
 	private String autherName;
 	
 	private String autherEmail;
+	
+	private Boolean isFavorate;
 
 	
 }
