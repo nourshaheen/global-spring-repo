@@ -42,7 +42,7 @@ public class AutherService extends BaseService<Auther, Long> {
 	}
 
 	@Override
-	@CacheEvict(value = {"auther"} , key ="#root.methodName", allEntries = true)
+//	@CacheEvict(value = {"auther"} , key ="#root.methodName", allEntries = true)
 	public Auther insert(Auther entity) {
 		
 	if (!entity.getEmail().isEmpty() && entity.getEmail() != null) {
@@ -79,8 +79,8 @@ public class AutherService extends BaseService<Auther, Long> {
 
 	}
 
-	@Async(value = "threadPoolTaskExecutor")
-	@Cacheable(value = "auther", key = "#email")
+//	@Async(value = "threadPoolTaskExecutor")
+//	@Cacheable(value = "auther", key = "#email")
 	public Optional<Auther> findByEmail(String email) {
 
 		return autherRepo.findByEmail(email);

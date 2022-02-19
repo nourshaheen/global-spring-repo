@@ -8,11 +8,13 @@ import org.hibernate.annotations.Formula;
 import com.global.book.base.BaseDto;
 import com.global.book.validator.IpAddress;
 
+import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
 
 @Setter
 @Getter
+@Builder
 public class AutherDto extends BaseDto<Long> {	
 	
 	@NotBlank
