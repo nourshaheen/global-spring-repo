@@ -16,6 +16,7 @@ import org.springframework.stereotype.Service;
 import com.global.entity.AppUser;
 import com.global.entity.Role;
 import com.global.repository.UserRepo;
+import com.global.security.AppUserDetail;
 
 import lombok.RequiredArgsConstructor;
 
@@ -53,18 +54,18 @@ public class UserService implements UserDetailsService {
 		  throw new UsernameNotFoundException("This User Not found with selected user name :- " + username);
 	  }
 		
-		return new User(appUser.get().getUserName(), appUser.get().getPassword(),getAuthorities(appUser.get()) );
+		return new AppUserDetail(appUser.get());
 	}
 	
-	private static List<GrantedAuthority> getAuthorities(AppUser user) {
-		
-		List<GrantedAuthority> authorities = new ArrayList<>();
-		
-		 if(!user.getRoles().isEmpty()) {
-		        	user.getRoles().forEach(role -> {
-		        		authorities.add(new SimpleGrantedAuthority(role.getName()));	
-		        	});
-		        }
-		     return authorities;
-		}
+//	private static List<GrantedAuthority> getAuthorities(AppUser user) {
+//		
+//		List<GrantedAuthority> authorities = new ArrayList<>();
+//		
+//		 if(!user.getRoles().isEmpty()) {
+//		        	user.getRoles().forEach(role -> {
+//		        		authorities.add(new SimpleGrantedAuthority(role.getName()));	
+//		        	});
+//		        }
+//		     return authorities;
+//		}
 }

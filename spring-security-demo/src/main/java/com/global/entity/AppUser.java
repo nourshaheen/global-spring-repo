@@ -4,6 +4,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -25,7 +26,8 @@ import lombok.Setter;
 @AllArgsConstructor
 @NoArgsConstructor
 public class AppUser {
-	
+
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id ;
@@ -36,11 +38,16 @@ public class AppUser {
 	
 	private String password ;
 	
-	@ManyToMany
+	@ManyToMany(fetch = FetchType.EAGER)
 	@JoinTable(name = "sec_user_roles" ,
 	    joinColumns = @JoinColumn(name = "user_id"),
 	    inverseJoinColumns = @JoinColumn(name = "role_id"))
 	@OrderColumn(name = "id")
 	private Set<Role> roles = new HashSet<>();
+	
+	public AppUser(Long id) {
+		super();
+		this.id = id;
+	}
 
 }
