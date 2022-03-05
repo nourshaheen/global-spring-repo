@@ -17,6 +17,9 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 @Configuration
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	
+	
+	String [] PUBLIC_END_POINTS = {"/api/v1/auth/login", "/api/v1/auth/refresh-token", "/api/v1/auth/logout"};
+	
 	@Autowired
 	private UserDetailsService userDetailsService;
 	
@@ -42,7 +45,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	            .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
 	            .and()
 	            .authorizeRequests()
-	            .antMatchers("/api/v1/auth/login").permitAll()
+	            .antMatchers(PUBLIC_END_POINTS).permitAll()
 	            .anyRequest().authenticated()
 	            .and()
 	            .addFilterBefore(authFilter(), UsernamePasswordAuthenticationFilter.class);

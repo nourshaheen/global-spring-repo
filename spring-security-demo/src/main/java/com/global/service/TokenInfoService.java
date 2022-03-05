@@ -1,5 +1,7 @@
 package com.global.service;
 
+import java.util.Optional;
+
 import org.springframework.stereotype.Service;
 
 import com.global.entity.TokenInfo;
@@ -18,7 +20,7 @@ public class TokenInfoService {
 		return tokenInfoRepo.findById(id).orElse(null);
 	}
 
-	public TokenInfo findByRefreshToken(String refreshToken) {
+	public Optional<TokenInfo> findByRefreshToken(String refreshToken) {
 
 		return tokenInfoRepo.findByRefreshToken(refreshToken);
 	}
@@ -26,5 +28,10 @@ public class TokenInfoService {
 	public TokenInfo save(TokenInfo entity) {
 
 		return tokenInfoRepo.save(entity);
+	}
+	
+	public void deleteById (Long id) {
+		
+		tokenInfoRepo.deleteById(id);
 	}
 }

@@ -27,6 +27,15 @@ public class AppUserDetail implements UserDetails {
 	
 	private List<GrantedAuthority> authorities ;
 	
+    private boolean isEnabled;
+	
+	private boolean isCredentialsNonExpired;
+	
+	private boolean isAccountNonLocked;
+	
+	private boolean isAccountNonExpired;
+	
+	
 
 	public AppUserDetail() {
 		super();
@@ -39,6 +48,10 @@ public class AppUserDetail implements UserDetails {
 		this.fullName =user.getFullName();
 		this.userName= user.getUserName();
 		this.password= user.getPassword();
+		this.isEnabled = user.isEnabled();
+		this.isCredentialsNonExpired = user.isCredentialsNonExpired();
+		this.isAccountNonExpired = user.isAccountNonExpired();
+		this.isAccountNonLocked = user.isAccountNonLocked();
 		
 		List<GrantedAuthority> authorities = new ArrayList<>();
 		
@@ -71,25 +84,25 @@ public class AppUserDetail implements UserDetails {
 	@Override
 	public boolean isAccountNonExpired() {
 		// TODO Auto-generated method stub
-		return true;
+		return isAccountNonExpired;
 	}
 
 	@Override
 	public boolean isAccountNonLocked() {
 		// TODO Auto-generated method stub
-		return true;
+		return isAccountNonLocked;
 	}
 
 	@Override
 	public boolean isCredentialsNonExpired() {
 		// TODO Auto-generated method stub
-		return true;
+		return isCredentialsNonExpired;
 	}
 
 	@Override
 	public boolean isEnabled() {
 		// TODO Auto-generated method stub
-		return true;
+		return isEnabled;
 	}
 
 }

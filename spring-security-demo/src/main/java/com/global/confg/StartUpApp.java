@@ -43,11 +43,11 @@ public class StartUpApp implements CommandLineRunner {
 			Set<Role>  empRoles = new HashSet<>();
 			empRoles.add(roleService.findByName("employee"));
 			
-			userService.save(new AppUser(null, "Nour Shaheen", "nour", "123", adminRoles));
+			userService.save(new AppUser(null, "Nour Shaheen", "nour", "123", adminRoles, true, true, true, true));
 			
-			userService.save(new AppUser(null, "Ali Mohamed", "ali", "123", userRoles));
+			userService.save(new AppUser(null, "Ali Mohamed", "ali", "123", userRoles, true, true, true, true));
 			
-			userService.save(new AppUser(null, "Ahmed Ebraheem", "ahmed", "123", empRoles));
+			userService.save(new AppUser(null, "Ahmed Ebraheem", "ahmed", "123", empRoles, true, true, true, true));
 		}
 		
 	}

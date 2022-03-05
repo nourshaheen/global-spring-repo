@@ -2,6 +2,7 @@ package com.global.security;
 
 import java.net.InetAddress;
 import java.net.UnknownHostException;
+import java.util.Optional;
 import java.util.UUID;
 
 import javax.servlet.http.HttpServletRequest;
@@ -31,6 +32,8 @@ public class AuthService {
 	 private final HttpServletRequest httpRequest;
 	 
 	 private final TokenInfoService tokenInfoService;
+	 
+	 private final JwtTokenUtils jwtTokenUtils;
 	 
 	 public JWTResponseDto login(String login, String password) {
 	        Authentication authentication = authManager.authenticate(
@@ -79,5 +82,29 @@ public class AuthService {
 			// tokenInfo.setLoginInfo(createLoginInfoFromRequestUserAgent());
 			return tokenInfoService.save(tokenInfo);
 		}
+	 
+	 
+	 public AccessTokenDto refreshAccessToken(String refreshToken) {
+	        if (jwtTokenUtils.isTokenExpired(refreshToken)) {
+	            return null;
+	        }
+	        String userName = jwtTokenUtils.getUserNameFromToken(refreshToken);
+	        Optional<TokenInfo> refresh = tokenInfoService.findByRefreshToken(refreshToken);
+	        if (!refresh.isPresent()) {
+	            return null;
+	        }
+
+	        return new AccessTokenDto(JwtTokenUtils.generateToken(userName, UUID.randomUUID().toString(), false));
+
+	    }
+	 
+	 
+	 public void logoutUser(String refreshToken) {
+	        Optional<TokenInfo> tokenInfo = tokenInfoService.findByRefreshToken(refreshToken);
+	        if (tokenInfo.isPresent()) {
+	            tokenInfoService.deleteById(tokenInfo.get().getId());
+	        }
+
+	    }
 
 }
