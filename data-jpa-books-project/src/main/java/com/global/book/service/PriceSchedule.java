@@ -7,14 +7,13 @@ import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 
 import lombok.extern.log4j.Log4j2;
-import net.javacrumbs.shedlock.spring.annotation.SchedulerLock;
 
 @Component
 @Log4j2
 public class PriceSchedule {
 		
 	@Scheduled(fixedRate = 200000)
-	@SchedulerLock(name = "bookComputePrice")
+//	@SchedulerLock(name = "bookComputePrice")
 	@Async
 	public void computePrice () throws InterruptedException {
 	
@@ -25,7 +24,7 @@ public class PriceSchedule {
 	
 	
 	@Scheduled(fixedRate = 200000)
-	@SchedulerLock(name = "bookComputeDiscount")
+//	@SchedulerLock(name = "bookComputeDiscount")
 	@Async
 	public void computeDiscount () throws InterruptedException {
 	

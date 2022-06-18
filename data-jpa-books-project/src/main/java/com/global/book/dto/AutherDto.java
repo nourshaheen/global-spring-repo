@@ -1,5 +1,7 @@
 package com.global.book.dto;
 
+import java.util.Date;
+
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 
@@ -14,7 +16,7 @@ import lombok.Setter;
 
 @Setter
 @Getter
-@Builder
+//@Builder
 public class AutherDto extends BaseDto<Long> {	
 	
 	@NotBlank
@@ -29,5 +31,7 @@ public class AutherDto extends BaseDto<Long> {
 	private long bookCount;
 
 	private String imagePath;
+	
+	private Date createdDate;
 
 }

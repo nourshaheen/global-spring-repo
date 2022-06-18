@@ -1,0 +1,36 @@
+{
+  "hrApp": {
+    "employee": {
+      "home": {
+        "title": "Employees",
+        "refreshListLabel": "Actualiser la liste",
+        "createLabel": "Créer un nouveau Employee",
+        "createOrEditLabel": "Créer ou éditer un Employee",
+        "notFound": "Aucun Employee trouvé"
+      },
+      "created": "Un nouveau Employee a été créé avec l'identifiant {{ param }}",
+      "updated": "Le Employee avec l'identifiant {{ param }} a été mis à jour",
+      "deleted": "Le Employee avec l'identifiant {{ param }} a été supprimé",
+      "delete": {
+        "question": "Etes-vous certain de vouloir supprimer le Employee {{ id }} ?"
+      },
+      "detail": {
+        "title": "Employee"
+      },
+      "id": "ID",
+      "firstName": "First Name",
+      "lastName": "Last Name",
+      "email": "Email",
+      "phoneNumber": "Phone Number",
+      "hireDate": "Hire Date",
+      "salary": "Salary",
+      "commissionPct": "Commission Pct",
+      "job": "Job",
+      "manager": "Manager",
+      "department": "Department",
+      "help": {
+        "firstName": "The firstname attribute."
+      }
+    }
+  }
+}

@@ -1,0 +1,25 @@
+{
+  "hrApp": {
+    "country": {
+      "home": {
+        "title": "Countries",
+        "refreshListLabel": "Actualiser la liste",
+        "createLabel": "Créer un nouveau Country",
+        "createOrEditLabel": "Créer ou éditer un Country",
+        "notFound": "Aucun Country trouvé"
+      },
+      "created": "Un nouveau Country a été créé avec l'identifiant {{ param }}",
+      "updated": "Le Country avec l'identifiant {{ param }} a été mis à jour",
+      "deleted": "Le Country avec l'identifiant {{ param }} a été supprimé",
+      "delete": {
+        "question": "Etes-vous certain de vouloir supprimer le Country {{ id }} ?"
+      },
+      "detail": {
+        "title": "Country"
+      },
+      "id": "ID",
+      "countryName": "Country Name",
+      "region": "Region"
+    }
+  }
+}

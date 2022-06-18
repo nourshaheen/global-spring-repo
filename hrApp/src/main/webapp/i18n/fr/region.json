@@ -1,0 +1,24 @@
+{
+  "hrApp": {
+    "region": {
+      "home": {
+        "title": "Regions",
+        "refreshListLabel": "Actualiser la liste",
+        "createLabel": "Créer un nouveau Region",
+        "createOrEditLabel": "Créer ou éditer un Region",
+        "notFound": "Aucun Region trouvé"
+      },
+      "created": "Un nouveau Region a été créé avec l'identifiant {{ param }}",
+      "updated": "Le Region avec l'identifiant {{ param }} a été mis à jour",
+      "deleted": "Le Region avec l'identifiant {{ param }} a été supprimé",
+      "delete": {
+        "question": "Etes-vous certain de vouloir supprimer le Region {{ id }} ?"
+      },
+      "detail": {
+        "title": "Region"
+      },
+      "id": "ID",
+      "regionName": "Region Name"
+    }
+  }
+}

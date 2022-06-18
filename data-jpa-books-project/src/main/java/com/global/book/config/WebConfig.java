@@ -2,10 +2,6 @@ package com.global.book.config;
 
 import java.time.Duration;
 
-import javax.sql.DataSource;
-
-import org.flywaydb.core.Flyway;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.EnableCaching;
 import org.springframework.context.MessageSource;
 import org.springframework.context.annotation.Bean;
@@ -28,10 +24,10 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 public class WebConfig implements WebMvcConfigurer {
 	
 	
-	@Autowired
-    public void WebConfig(DataSource dataSource) {
-        Flyway.configure().baselineOnMigrate(true).dataSource(dataSource).load().migrate();
-    }
+//	@Autowired
+//    public void WebConfig(DataSource dataSource) {
+//        Flyway.configure().baselineOnMigrate(true).dataSource(dataSource).load().migrate();
+//    }
 
 	@Bean
 	public AuditorAware<String> auditorAware() {

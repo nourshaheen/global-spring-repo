@@ -1,0 +1,17 @@
+
+
+<h2> {{pageTitle}}</h2>
+
+
+<div class="card" style="width: 18rem;" *ngFor="let author of authors">
+    <img [src]="author.imagePath" class="card-img-top" alt="...">
+    <div class="card-body">
+      <h5 class="card-title">{{author.name | uppercase}}</h5>
+      <p class="card-text">{{author.email}}</p>
+      <p class="card-text">{{author.ipAddress}}</p>
+      <h5 class="card-title">{{author.createdDate | date:'short' }}</h5>
+      <p class="card-text" *ngIf="author.bookCount > 0" >{{author.bookCount}} </p>
+      <a href="#" class="btn btn-primary">Go somewhere</a>
+      <button class="btn btn-primary" [disabled] = "author.bookCount >= 2" >Add Author</button>  
+    </div>
+  </div>

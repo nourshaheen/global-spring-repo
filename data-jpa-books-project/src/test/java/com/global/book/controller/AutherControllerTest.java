@@ -86,11 +86,7 @@ public class AutherControllerTest {
 		Auther autherParam = new Auther("Ali", "192.1682.125.52", "ali@gmail.com", 0, null);
 		
 
-		AutherDto dto = AutherDto.builder()
-				.name("Ali")
-				.email("Ali@gmail.com")
-				.ipAddress(null)
-				.build();
+		AutherDto dto = new AutherDto();
 
 		Mockito.when(autherService.insert(Mockito.any(Auther.class))).thenReturn(autherParam);
 

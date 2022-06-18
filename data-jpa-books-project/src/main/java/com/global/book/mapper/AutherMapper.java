@@ -17,7 +17,7 @@ import com.global.book.entity.Auther;
 public interface AutherMapper {
 	
 	@Mappings({
-//		@Mapping(source = "fullName" , target = "name"),
+		@Mapping(source = "id" , target = "id"),
 		@Mapping(target = "name" , expression = "java(LocaleContextHolder.getLocale().getLanguage() ==\"ar\" ? entity.getFullName() :  entity.getFullName())"),
 		@Mapping(target = "ipAddress" , defaultValue = "192.135.125.2"),
 	})
